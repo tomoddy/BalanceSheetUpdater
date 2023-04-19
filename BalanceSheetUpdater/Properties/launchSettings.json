@@ -2,7 +2,7 @@
   "profiles": {
     "BalanceSheetUpdater": {
       "commandName": "Project",
-      "commandLineArgs": "\"C:\\Users\\Tom\\Downloads\\24095060_20231419_0704.csv\""
+      "commandLineArgs": ""
     }
   }
 }
