@@ -1,17 +1,24 @@
-﻿namespace BalanceSheetUpdater
+﻿using System.Configuration;
+
+namespace BalanceSheetUpdater
 {
+    /// <summary>
+    /// Program
+    /// </summary>
     internal class Program
     {
+        /// <summary>
+        /// Main
+        /// </summary>
+        /// <param name="args">Command line args</param>
         static void Main(string[] args)
         {
-            string inputPath = args[0];
-            string keyPath = args[1];
-            string spreadsheetId = "1SKVWjqeUeJM5bwEE3gckqDQvifd8U1p6SFG7fUizMJw";
-
-            StatementReader statementReader = new(inputPath);
+            // Create statement
+            StatementReader statementReader = new(args[0]);
             Statement statement = statementReader.GenerateStatement();
 
-            GoogleSheetClient client = new(keyPath, spreadsheetId, DateTime.Now.ToString("yyyy"));
+            // Upload statement
+            GoogleSheetClient client = new(ConfigurationManager.AppSettings.Get("KeyPath")!, ConfigurationManager.AppSettings.Get("SpreadsheetId")!, DateTime.Now.ToString("yyyy"));
             client.UploadStatement(statement);
         }
     }
